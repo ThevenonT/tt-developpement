@@ -319,6 +319,44 @@ ul { list-style: none; padding: 0; }
   -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 75%);
   mask-image: radial-gradient(70% 60% at 50% 30%, #000 30%, transparent 75%);
 }
+/* Bandeau d'annonce de l'offre (haut à droite) */
+.offer-badge {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: rgba(15, 23, 42, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4) var(--space-2) var(--space-2);
+  box-shadow: var(--shadow-accent);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.offer-badge:hover { transform: translateY(-2px); box-shadow: 0 12px 38px rgba(34, 197, 94, 0.4); }
+.offer-badge-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #052e16;
+}
+.offer-badge-icon svg { width: 20px; height: 20px; }
+.offer-badge-text { display: flex; flex-direction: column; line-height: 1.25; }
+.offer-badge-text strong { font-family: var(--font-heading); font-size: 0.9rem; }
+.offer-badge-sub { font-size: 0.78rem; color: var(--color-muted-foreground); }
+.offer-spots {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
 .hero-inner {
   position: relative;
   display: grid;
@@ -1099,7 +1137,15 @@ ul { list-style: none; padding: 0; }
   .compare-col--me { order: -1; }
   .pricing { grid-template-columns: 1fr; max-width: 460px; }
   .section { padding-block: var(--space-16); }
-  .hero { padding-block: var(--space-16) var(--space-12); }
+  .hero { padding-block: var(--space-8) var(--space-12); }
+
+  /* Bandeau d'offre : repasse dans le flux, centré au-dessus du contenu */
+  .offer-badge {
+    position: static;
+    width: 100%;
+    margin-bottom: var(--space-8);
+    justify-content: center;
+  }
 }
 
 @media (max-width: 560px) {
