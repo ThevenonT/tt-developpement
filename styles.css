@@ -431,6 +431,45 @@ ul { list-style: none; padding: 0; }
   font-variant-numeric: tabular-nums;
 }
 
+/* Stat "Prix" avec bascule animée 800 € -> 600 € */
+.stat--price dd { display: flex; flex-direction: column; }
+.hp-line { display: flex; align-items: baseline; gap: var(--space-2); }
+.hp-old {
+  font-size: 1.25rem;
+  color: var(--color-muted-foreground);
+  text-decoration: line-through;
+  text-decoration-color: var(--color-destructive);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.hp-old.show { opacity: 1; transform: none; }
+.hp-new { transition: color 400ms ease; }
+.hp-new.promo { color: var(--color-accent); }
+.stat-offer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.stat-offer.show { opacity: 1; transform: none; }
+.stat-offer-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse 2s infinite;
+}
+
 /* ---------- Terminal ---------- */
 .terminal {
   background: #0b1120;

@@ -71,6 +71,49 @@
     requestAnimationFrame(tick);
   }
 
+  /* ---------- Valeur numérique animée (générique, avec Promise) ---------- */
+  function animateValue(el, from, to, duration, suffix) {
+    return new Promise(function (resolve) {
+      if (reduceMotion) { el.textContent = to + suffix; resolve(); return; }
+      const start = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick); else resolve();
+      })(performance.now());
+    });
+  }
+
+  /* ---------- Bascule de prix 800 € -> 600 € (offre de bienvenue) ---------- */
+  let pricePromoDone = false;
+  function runPricePromo() {
+    if (pricePromoDone) return;
+    pricePromoDone = true;
+    const hpNew = document.getElementById("hp-new");
+    const hpOld = document.getElementById("hp-old");
+    const offer = document.getElementById("stat-offer");
+    if (!hpNew || !hpOld || !offer) return;
+    const EUR = " €";
+
+    if (reduceMotion) {
+      hpOld.textContent = "800" + EUR; hpOld.classList.add("show");
+      hpNew.textContent = "600" + EUR; hpNew.classList.add("promo");
+      offer.classList.add("show");
+      return;
+    }
+
+    animateValue(hpNew, 0, 800, 1200, EUR)
+      .then(function () { return new Promise(function (r) { setTimeout(r, 1000); }); })
+      .then(function () {
+        hpOld.textContent = "800" + EUR;
+        hpOld.classList.add("show");
+        hpNew.classList.add("promo");
+        return animateValue(hpNew, 800, 600, 900, EUR);
+      })
+      .then(function () { offer.classList.add("show"); });
+  }
+
   /* ---------- Jauges Lighthouse ---------- */
   const CIRC = 327; // 2π·52
   function animateGauge(fig) {
@@ -91,6 +134,7 @@
         const el = entry.target;
         el.classList.add("is-visible");
         el.querySelectorAll(".count").forEach(animateCount);
+        if (el.querySelector("#hp-new")) runPricePromo();
         if (el.matches(".gauge")) animateGauge(el);
         el.querySelectorAll(".gauge").forEach(animateGauge);
         obs.unobserve(el);
@@ -107,6 +151,7 @@
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
     document.querySelectorAll(".count").forEach(animateCount);
     document.querySelectorAll(".gauge").forEach(animateGauge);
+    runPricePromo();
   }
 
   /* ---------- Scrollspy ---------- */
