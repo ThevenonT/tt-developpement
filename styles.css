@@ -676,6 +676,8 @@ ul { list-style: none; padding: 0; }
 
 /* ---------- Visibilité : parcours client ---------- */
 .flow {
+  list-style: none;
+  padding: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
@@ -837,7 +839,7 @@ ul { list-style: none; padding: 0; }
 .work-note { text-align: center; color: var(--color-muted-foreground); font-size: 0.9rem; margin-top: var(--space-8); }
 
 /* ---------- Méthode / Timeline ---------- */
-.timeline { position: relative; display: grid; gap: var(--space-6); max-width: 760px; }
+.timeline { list-style: none; padding: 0; position: relative; display: grid; gap: var(--space-6); max-width: 760px; }
 .timeline::before {
   content: "";
   position: absolute;
