@@ -544,24 +544,22 @@
       </div>
     </section>
 
-    <!-- CONTACT CTA -->
+    <!-- CONTACT -->
     <section class="section section--alt" id="contact" aria-labelledby="contact-title">
-      <div class="container">
-        <div class="cta-panel" data-reveal>
-          <div class="cta-glow" aria-hidden="true"></div>
+      <div class="container contact">
+        <div class="contact-intro" data-reveal>
           <p class="eyebrow">Démarrons</p>
-          <h2 id="contact-title">Votre site en ligne dès cette semaine</h2>
+          <h2 id="contact-title">Parlons de votre projet</h2>
           <p class="cta-sub">
-            Décrivez votre projet en deux lignes&nbsp;: je vous réponds rapidement avec un délai et les prochaines étapes.
+            Remplissez le formulaire&nbsp;: plus vous m'en dites, plus ma réponse sera précise.
+            Je reviens vers vous rapidement avec un délai et les prochaines étapes.
           </p>
 
-          <div class="cta-actions">
-            <a class="btn btn-primary btn-lg" data-magnetic
-               href="mailto:contact@ttdeveloppement.fr?subject=Projet%20de%20site%20vitrine&body=Bonjour%2C%0A%0AVoici%20mon%20activit%C3%A9%20%3A%20%0AMon%20besoin%20%3A%20%0A%0AMerci%20%21">
-              Envoyer un email
-            </a>
-            <a class="btn btn-ghost btn-lg" href="tel:+33600000000">Appeler</a>
-          </div>
+          <ul class="contact-assure">
+            <li>Réponse sous 24h ouvrées</li>
+            <li>Devis clair et gratuit, sans engagement</li>
+            <li>Un seul interlocuteur, qui code votre site</li>
+          </ul>
 
           <div class="cta-direct">
             <button class="copy-email" id="copy-email" type="button" data-email="contact@ttdeveloppement.fr">
@@ -571,8 +569,93 @@
               <span class="copy-text">contact@ttdeveloppement.fr</span>
               <span class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></span>
             </button>
+            <a class="contact-tel" href="tel:+33600000000">06 00 00 00 00</a>
           </div>
         </div>
+
+        <form class="contact-form" id="contact-form" data-reveal novalidate>
+          <!-- Honeypot anti-spam -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Ne pas remplir</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Nom complet <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" autocomplete="name" required aria-required="true" aria-describedby="name-error" />
+              <p class="error" id="name-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="phone">Téléphone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required aria-required="true" aria-describedby="email-error" />
+              <p class="error" id="email-error" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="company">Entreprise / activité</label>
+              <input type="text" id="company" name="company" autocomplete="organization" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="sector">Secteur d'activité</label>
+              <select id="sector" name="sector">
+                <option value="">Sélectionnez…</option>
+                <option>Artisan / BTP</option>
+                <option>Restaurant / Café</option>
+                <option>Commerce</option>
+                <option>PME / Entreprise</option>
+                <option>Profession libérale</option>
+                <option>Freelance / Indépendant</option>
+                <option>Association</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="offer">Offre qui vous intéresse</label>
+              <select id="offer" name="offer">
+                <option value="">Sélectionnez…</option>
+                <option>Offre de bienvenue — 600 € + 1 mois Google Ads</option>
+                <option>Site vitrine — 800 €</option>
+                <option>Site + campagnes publicitaires</option>
+                <option>Je ne sais pas encore</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="field-label">Avez-vous déjà un site&nbsp;?</span>
+            <div class="radio-row" role="radiogroup" aria-label="Avez-vous déjà un site ?">
+              <label class="radio"><input type="radio" name="hasSite" value="Non" /> <span>Non, c'est un premier site</span></label>
+              <label class="radio"><input type="radio" name="hasSite" value="Oui" /> <span>Oui, je veux le refaire</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Votre projet <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error" placeholder="Votre activité, vos pages souhaitées, vos délais, ce que vous attendez du site…"></textarea>
+            <p class="error" id="message-error" role="alert"></p>
+          </div>
+
+          <div class="field field--check">
+            <label class="checkbox">
+              <input type="checkbox" id="consent" name="consent" required aria-required="true" aria-describedby="consent-error" />
+              <span>J'accepte que mes informations soient utilisées pour répondre à ma demande. <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            <p class="error" id="consent-error" role="alert"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block btn-lg" data-magnetic>Envoyer ma demande</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>

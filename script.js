@@ -284,4 +284,121 @@
       }
     });
   }
+
+  /* ---------- Formulaire de contact ---------- */
+  const form = document.getElementById("contact-form");
+  if (form) {
+    const status = document.getElementById("form-status");
+    const honeypot = form.querySelector("#website");
+
+    const validators = {
+      name: function (v) { return v.trim() ? "" : "Merci d'indiquer votre nom."; },
+      email: function (v) {
+        if (!v.trim()) return "Merci d'indiquer votre email.";
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? "" : "Cet email ne semble pas valide.";
+      },
+      message: function (v) {
+        if (!v.trim()) return "Merci de décrire votre projet.";
+        return v.trim().length < 10 ? "Quelques mots de plus seraient utiles (10 caractères min)." : "";
+      },
+      consent: function (_v, el) {
+        return el && el.checked ? "" : "Merci d'accepter pour pouvoir vous répondre.";
+      },
+    };
+
+    function setError(field, msg) {
+      const input = form.querySelector("#" + field);
+      const errEl = document.getElementById(field + "-error");
+      if (errEl) errEl.textContent = msg;
+      if (input && input.type !== "checkbox") {
+        if (msg) input.setAttribute("aria-invalid", "true");
+        else input.removeAttribute("aria-invalid");
+      }
+    }
+
+    // Validation au blur / changement
+    Object.keys(validators).forEach(function (field) {
+      const input = form.querySelector("#" + field);
+      if (!input) return;
+      const evt = input.type === "checkbox" ? "change" : "blur";
+      input.addEventListener(evt, function () {
+        setError(field, validators[field](input.value, input));
+      });
+      input.addEventListener("input", function () {
+        if (input.getAttribute("aria-invalid") === "true") {
+          setError(field, validators[field](input.value, input));
+        }
+      });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      status.textContent = "";
+      status.className = "form-status";
+
+      if (honeypot && honeypot.value) return; // bot
+
+      let firstInvalid = null;
+      Object.keys(validators).forEach(function (field) {
+        const input = form.querySelector("#" + field);
+        const msg = validators[field](input.value, input);
+        setError(field, msg);
+        if (msg && !firstInvalid) firstInvalid = input;
+      });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        status.textContent = "Merci de corriger les champs indiqués.";
+        status.classList.add("error-msg");
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Envoi en cours…";
+
+      const val = function (id) {
+        const el = form.querySelector("#" + id);
+        return el ? el.value : "";
+      };
+      const payload = {
+        name: val("name"),
+        email: val("email"),
+        phone: val("phone"),
+        company: val("company"),
+        sector: val("sector"),
+        offer: val("offer"),
+        hasSite: (form.querySelector('input[name="hasSite"]:checked') || {}).value || "",
+        message: val("message"),
+        consent: form.querySelector("#consent").checked,
+        website: honeypot ? honeypot.value : "",
+      };
+
+      fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          return res.json().then(function (data) { return { ok: res.ok, data: data }; });
+        })
+        .then(function (r) {
+          if (r.ok) {
+            form.reset();
+            status.textContent = "Merci ! Votre demande a bien été envoyée, je vous réponds rapidement.";
+            status.classList.add("success");
+          } else {
+            status.textContent = (r.data && r.data.error) || "L'envoi a échoué. Réessayez ou écrivez-moi directement.";
+            status.classList.add("error-msg");
+          }
+        })
+        .catch(function () {
+          status.textContent = "Connexion impossible. Vérifiez votre réseau ou écrivez-moi directement.";
+          status.classList.add("error-msg");
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Envoyer ma demande";
+        });
+    });
+  }
 })();
