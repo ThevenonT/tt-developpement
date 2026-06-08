@@ -580,6 +580,7 @@ ul { list-style: none; padding: 0; }
 .bento-card:hover { transform: translateY(-4px); border-color: var(--color-accent); }
 .bento-card--large { grid-column: span 1; grid-row: span 2; background: linear-gradient(160deg, var(--color-secondary), var(--color-muted)); }
 .bento-card--wide { grid-column: span 2; }
+.bento-card--full { grid-column: 1 / -1; }
 
 .card-icon {
   width: 48px;
