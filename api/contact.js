@@ -15,7 +15,7 @@ export default async function handler(req, res) {
 
   const data = req.body && typeof req.body === "object" ? req.body : {};
   const {
-    name, email, phone, company, sector, offer, hasSite, message, consent, website,
+    name, email, phone, company, sector, offer, googleMaps, message, consent, website,
   } = data;
 
   // Honeypot : si ce champ caché est rempli, c'est un bot — on ignore en silence.
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
         ${row("Entreprise / activité", company)}
         ${row("Secteur", sector)}
         ${row("Offre visée", offer)}
-        ${row("A déjà un site", hasSite)}
+        ${row("Présent sur Google Maps", googleMaps)}
       </table>
       <p style="margin-top:16px;color:#64748b;">Projet :</p>
       <p style="color:#0f172a;line-height:1.6;">${esc(message).replace(/\n/g, "<br>")}</p>

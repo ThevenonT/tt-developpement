@@ -367,7 +367,7 @@
         company: val("company"),
         sector: val("sector"),
         offer: val("offer"),
-        hasSite: (form.querySelector('input[name="hasSite"]:checked') || {}).value || "",
+        googleMaps: (form.querySelector('input[name="googleMaps"]:checked') || {}).value || "",
         message: val("message"),
         consent: form.querySelector("#consent").checked,
         website: honeypot ? honeypot.value : "",
