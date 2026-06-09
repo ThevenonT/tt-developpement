@@ -1379,23 +1379,30 @@ ul { list-style: none; padding: 0; }
   /* Terminal : hauteur fixe plus haute (le texte se replie davantage) */
   .terminal-body { height: 300px; }
 
-  /* Bandeau d'offre : repasse dans le flux, centré au-dessus du contenu */
+  /* Bandeau d'offre : repasse dans le flux, avec marges (pas de débordement) */
   .offer-badge {
     position: static;
-    width: 100%;
-    margin-bottom: var(--space-8);
+    display: flex;
+    width: auto;
+    margin: 0 var(--space-6) var(--space-8);
     justify-content: center;
   }
+  .offer-badge::before { display: none; } /* anneau pulsé retiré : il débordait */
 }
 
 @media (max-width: 560px) {
   .bento { grid-template-columns: 1fr; }
   .bento-card--wide { grid-column: span 1; }
-  .gauges { grid-template-columns: 1fr 1fr; }
   .hero-stats { grid-template-columns: 1fr; gap: var(--space-4); }
   .hero-actions .btn,
   .cta-actions .btn { width: 100%; }
   .copy-email { font-size: 0.82rem; }
+
+  /* Jauges : SVG réduit pour tenir dans 2 colonnes sans déborder */
+  .gauges { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .gauge { padding: var(--space-4); }
+  .gauge svg { width: 108px; height: 108px; }
+  .gauge-value { top: calc(var(--space-4) + 54px); font-size: 1.5rem; }
 }
 
 /* ---------- Préférences de mouvement ---------- */
