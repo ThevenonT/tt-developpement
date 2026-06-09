@@ -67,7 +67,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
 }
 
 img { max-width: 100%; display: block; }
@@ -399,7 +398,7 @@ ul { list-style: none; padding: 0; }
 .hero-copy { max-width: 620px; }
 
 .hero h1 {
-  font-size: clamp(1.95rem, 6.2vw, 4rem);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
   margin-bottom: var(--space-6);
 }
 .hero-sub {
@@ -1376,7 +1375,6 @@ ul { list-style: none; padding: 0; }
   .pricing { grid-template-columns: 1fr; max-width: 460px; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
   .section { padding-block: var(--space-16); }
-  .section-head { margin-bottom: var(--space-8); }
   .hero { padding-block: var(--space-8) var(--space-12); }
   /* Terminal : hauteur fixe plus haute (le texte se replie davantage) */
   .terminal-body { height: 300px; }
@@ -1388,11 +1386,6 @@ ul { list-style: none; padding: 0; }
     margin-bottom: var(--space-8);
     justify-content: center;
   }
-  .offer-badge::before { display: none; } /* évite tout débordement de l'anneau pulsé */
-
-  /* Footer empilé et aligné à gauche */
-  .footer-inner { flex-direction: column; align-items: flex-start; gap: var(--space-6); }
-  .footer-legal { text-align: left; }
 }
 
 @media (max-width: 560px) {
@@ -1400,28 +1393,9 @@ ul { list-style: none; padding: 0; }
   .bento-card--wide { grid-column: span 1; }
   .gauges { grid-template-columns: 1fr 1fr; }
   .hero-stats { grid-template-columns: 1fr; gap: var(--space-4); }
-  .hero-actions .btn { width: 100%; }
-  .copy-email { font-size: 0.82rem; word-break: break-all; }
-  .cta-direct { align-items: stretch; }
-
-  /* Densité des cartes / formulaire ajustée au mobile */
-  .bento-card,
-  .compare-col,
-  .quote,
-  .ad-card,
-  .price-card,
-  .contact-form { padding: var(--space-6); }
-  .marquee-track { font-size: 0.95rem; gap: var(--space-4); }
-
-  /* Évite que deux radios trop serrés se chevauchent */
-  .radio { flex: 1 1 100%; }
-}
-
-@media (max-width: 400px) {
-  .container { padding-inline: 1.25rem; }
-  .gauges { grid-template-columns: 1fr; }
-  .hero h1 br { display: none; } /* laisse le titre se répartir naturellement */
-  .logo-text { font-size: 1.05rem; }
+  .hero-actions .btn,
+  .cta-actions .btn { width: 100%; }
+  .copy-email { font-size: 0.82rem; }
 }
 
 /* ---------- Préférences de mouvement ---------- */
