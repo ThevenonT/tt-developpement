@@ -978,9 +978,9 @@ ul { list-style: none; padding: 0; }
 /* ---------- Offres / Tarifs ---------- */
 .pricing {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
-  max-width: 880px;
+  max-width: 1080px;
   margin-inline: auto;
   align-items: stretch;
 }
@@ -1058,6 +1058,15 @@ ul { list-style: none; padding: 0; }
   color: var(--color-muted-foreground);
   text-decoration: line-through;
   text-decoration-color: var(--color-destructive);
+}
+.price-from {
+  align-self: center;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--color-muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 .price-value {
   font-family: var(--font-heading);
@@ -1314,6 +1323,7 @@ ul { list-style: none; padding: 0; }
   .bento-card--wide { grid-column: span 2; }
   .gauges { grid-template-columns: repeat(2, 1fr); }
   .quotes { grid-template-columns: 1fr; }
+  .pricing { grid-template-columns: 1fr; max-width: 460px; }
   .flow { grid-template-columns: 1fr; gap: var(--space-8); }
   .ads { grid-template-columns: 1fr; }
   /* Flèches de liaison : orientation verticale */
