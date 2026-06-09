@@ -500,7 +500,9 @@ ul { list-style: none; padding: 0; }
   padding: var(--space-6);
   font-size: 0.9rem;
   line-height: 1.7;
-  min-height: 230px;
+  /* Hauteur fixe : l'animation de frappe ne doit jamais redimensionner la page */
+  height: 250px;
+  overflow: hidden;
   white-space: pre-wrap;
   word-break: break-word;
   color: #cbd5e1;
@@ -1374,6 +1376,8 @@ ul { list-style: none; padding: 0; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
   .section { padding-block: var(--space-16); }
   .hero { padding-block: var(--space-8) var(--space-12); }
+  /* Terminal : hauteur fixe plus haute (le texte se replie davantage) */
+  .terminal-body { height: 300px; }
 
   /* Bandeau d'offre : repasse dans le flux, centré au-dessus du contenu */
   .offer-badge {
